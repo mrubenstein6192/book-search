@@ -9,21 +9,26 @@ const db = require("../models");
 module.exports = {
 
     findAll: (req, res) => {
-        db.Book
+        db.Books
             .find(req.query)
-            .sort({})
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
 
-    deleteBook: (req,res) => {
-        db.Book
-        .deleteOne({
-            _id: req.params.id,
-        })
-        .then((dbPost) => {
-
-        })
+    deleteBook: (req, res) => {
+        db.Books
+            .findById({
+                _id: req.params.id,
+            })
+            .then(dbModel => dbModel.remove())
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    create: (req, res) => {
+        db.Books
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 
 
