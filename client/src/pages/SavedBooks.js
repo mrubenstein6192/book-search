@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
-import API from "../utils/API";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+// import DeleteBtn from "../components/DeleteBtn";
+// import Jumbotron from "../components/Jumbotron";
+// import API from "../utils/API";
+// import { Link } from "react-router-dom";
+// import { Col, Row, Container } from "../components/Grid";
+// import { List, ListItem } from "../components/List";
+// import { Input, TextArea, FormBtn } from "../components/Form";
 
 class SavedBooks extends Component {
     state = {
@@ -15,55 +15,32 @@ class SavedBooks extends Component {
         description: ""
     };
 
-    componentDidMount() {
-        this.loadBooks();
-    }
+    // componentDidMount() {
+    //     this.loadBooks();
+    // }
 
-    loadBooks = () => {
-        API.getBooks()
-            .then(res =>
-                this.setState({ books: res.data, title: "", author: "", description: "" })
-            )
-            .catch(err => console.log(err));
-    };
+    // loadBooks = () => {
+    //     API.getBooks()
+    //         .then(res =>
+    //             this.setState({ books: res.data, title: "", author: "", description: "" })
+    //         )
+    //         .catch(err => console.log(err));
+    // };
 
-    deleteBook = id => {
-        API.deleteBook(id)
-            .then(res => this.loadBooks())
-            .catch(err => console.log(err));
-    };
+
 
 
 
     render() {
         return (
-            <Container fluid>
-                <Row>
-                    <Col size="md-6 sm-12">
-                        <Jumbotron>
+            <div>
+             
+                 
                             <h1>Saved Books</h1>
-                        </Jumbotron>
+                      
 
-                        {/* we map through our state books array into our list components */}
-                        {this.state.books.length ? (
-                            <List>
-                                {this.state.books.map(book => (
-                                    <ListItem key={book._id}>
-                                        <Link to={"/books/" + book._id}>
-                                            <strong>
-                                                {book.title} by {book.author}
-                                            </strong>
-                                        </Link>
-                                        <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                                    </ListItem>
-                                ))}
-                            </List>
-                        ) : (
-                                <h3>No Results to Display</h3>
-                            )}
-                    </Col>
-                </Row>
-            </Container>
+                
+                 </div>
         );
     }
 }
