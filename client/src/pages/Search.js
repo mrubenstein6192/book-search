@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-// import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
 // import { Link } from "react-router-dom";
-// import { Col, Row, Container } from "../components/Grid";
-// import { List, ListItem } from "../components/List";
-// import { Input, TextArea, FormBtn } from "../components/Form";
+import { Container, Row, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Jumbotron } from 'reactstrap';
 
 class Search extends Component {
     state = {
@@ -12,29 +11,57 @@ class Search extends Component {
         author: "",
     };
 
-    componentDidMount() {
-        this.loadBooks();
-    }
+    // componentDidMount() {
+    //     this.loadBooks();
+    // }
 
-    loadBooks = () => {
-        API.getBooks()
-            .then(res =>
-                this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-            )
-            .catch(err => console.log(err));
-    };
+    // loadBooks = () => {
+    //     API.getBooks()
+    //         .then(res =>
+    //             this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+    //         )
+    //         .catch(err => console.log(err));
+    // };
 
 
 
     render() {
         return (
-            <div>
+            <Container>
+                <Row>
+                    <Col>
+                        <Jumbotron fluid>
+                            <Container fluid>
+                                <center>
+                                    <h1 className="display-3">Book Lovers welcomed here.</h1>
+                                    <br></br>
+
+                                    <p className="lead">Ever wish you had your own personal butler for books? </p>
+
+                                    <p className="lead">With Bookmarker Pro you can search for your favorite books, and even save them for later.
+                                We take reading seriously.</p>
+                                </center>
+                            </Container>
+                        </Jumbotron>
+                    </Col>
+                </Row>
+
+                <Row>
+
+                    <Col sm="12" md={{ size: 7, offset: 2 }}>
+                        <Form>
+                            <FormGroup>
+                                <Label for="userSearch">Search all the books.</Label>
+                                <Input type="input" name="search" id="bookSearch" placeholder="Search for a book. Ex. 'Harry Potter'" />
+                            </FormGroup>
+                            <Button>Submit</Button>
+                        </Form>
+                    </Col>
+                </Row>
 
 
-
-            </div>
-
-
+                
+            </Container>
 
 
 
