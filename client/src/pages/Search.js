@@ -14,6 +14,11 @@ class Search extends Component {
         author: "",
     };
 
+    // handle our input change for search on our form below
+    handleInputChange = event => {
+        this.setState({ search: event.target.value });
+    }
+
 
     //handles our form on click below where uses input their search query
     handleFormSubmit = event => {
@@ -61,12 +66,15 @@ class Search extends Component {
                         <Form>
                             <FormGroup>
                                 <Label for="userSearch">Search all the books.</Label>
-                                <Input type="input" name="search" id="bookSearch" placeholder="Search for a book. Ex. 'Harry Potter'" />
+                                <Input type="input" name="search" id="bookSearch"
+                                    handleInputChange={this.handleInputChange}
+                                    placeholder="Search for a book. Ex. 'Harry Potter'" />
                             </FormGroup>
                             <Button onClick={this.handleFormSubmit}>Submit</Button>
                         </Form>
                     </Col>
                 </Row>
+                
 
 
 
