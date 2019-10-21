@@ -15,9 +15,10 @@ class Search extends Component {
     //     this.loadBooks();
     // }
 
-    // loadBooks = () => {
-    //     API.getBooks()
+    // loadBooks = (query) => {
+    //     API.searchGoogleBooks(query)
     //         .then(res =>
+                // console.log(query);
     //             this.setState({ books: res.data, title: "", author: "", synopsis: "" })
     //         )
     //         .catch(err => console.log(err));
