@@ -1,28 +1,36 @@
 import React, { Component } from "react";
-// import API from "../utils/API";
 // import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'reactstrap';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Jumbotron } from 'reactstrap';
+import API from "../utils/API";
 
 class Search extends Component {
     state = {
+        search: "",
+        results: [],
+        books: [],
         title: "",
         author: "",
     };
 
-    // componentDidMount() {
-    //     this.loadBooks();
-    // }
 
-    // loadBooks = (query) => {
-    //     API.searchGoogleBooks(query)
-    //         .then(res =>
-                // console.log(query);
-    //             this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-    //         )
-    //         .catch(err => console.log(err));
-    // };
+    //handles our form on click below where uses input their search query
+    handleFormSubmit = event => {
+        event.preventDefault();
+
+        //uses our utils/API google function through axios to call the API, then sets it to our results state
+        API.searchGoogleBooks(this.state.search)
+            .then(res => {
+                if (res.data.status === "error") {
+                    throw new Error(res.data.message);
+                }
+                this.setState({ results: res.data.message, error: "" });
+            })
+            .catch(err => this.setState({ error: err.message }));
+
+
+    };
 
 
 
@@ -55,13 +63,13 @@ class Search extends Component {
                                 <Label for="userSearch">Search all the books.</Label>
                                 <Input type="input" name="search" id="bookSearch" placeholder="Search for a book. Ex. 'Harry Potter'" />
                             </FormGroup>
-                            <Button>Submit</Button>
+                            <Button onClick={this.handleFormSubmit}>Submit</Button>
                         </Form>
                     </Col>
                 </Row>
 
 
-                
+
             </Container>
 
 
