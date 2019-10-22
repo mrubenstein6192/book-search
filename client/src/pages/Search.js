@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'reactstrap';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Jumbotron } from 'reactstrap';
 import API from "../utils/API";
 
@@ -14,8 +14,10 @@ class Search extends Component {
         author: "",
     };
 
+
+   
     // handle our input change for search on our form below
-    handleInputChange = event => {
+    handleChange = event => {
         this.setState({ search: event.target.value });
     }
 
@@ -25,12 +27,17 @@ class Search extends Component {
         event.preventDefault();
 
         //uses our utils/API google function through axios to call the API, then sets it to our results state
+
+        // this does save our input to our search state, which console logs fine lol
+        // but doesn't do anything with the API also lol
         API.searchGoogleBooks(this.state.search)
             .then(res => {
                 if (res.data.status === "error") {
                     throw new Error(res.data.message);
                 }
                 this.setState({ results: res.data.message, error: "" });
+                console.log(this.state.search);
+                console.log(this.state.results);
             })
             .catch(err => this.setState({ error: err.message }));
 
@@ -67,14 +74,14 @@ class Search extends Component {
                             <FormGroup>
                                 <Label for="userSearch">Search all the books.</Label>
                                 <Input type="input" name="search" id="bookSearch"
-                                    handleInputChange={this.handleInputChange}
+                                    onChange={this.handleChange}
                                     placeholder="Search for a book. Ex. 'Harry Potter'" />
                             </FormGroup>
                             <Button onClick={this.handleFormSubmit}>Submit</Button>
                         </Form>
                     </Col>
                 </Row>
-                
+
 
 
 
