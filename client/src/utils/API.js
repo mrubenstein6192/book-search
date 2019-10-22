@@ -1,16 +1,19 @@
 import axios from "axios";
 // const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
-const GoogleKey = "&key=" + process.env.REACT_APP_GOOGLE_API_KEY + '"';
+// const GoogleKey = "&key=" + process.env.REACT_APP_GOOGLE_API_KEY + '"';
 
+//export an object containing methods for calling our Google API
 
 export default {
 
     searchGoogleBooks: function (query) {
-        console.log(GoogleKey);
+        // console.log(GoogleKey);
 
-        // https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyBEKmCmy448Kd0lEL71aYyI5l3IJoHW124
+        console.log("Query search sent from front end form", query);
 
-        return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + query + "AIzaSyBEKmCmy448Kd0lEL71aYyI5l3IJoHW124");
+        
+
+        return axios.get("https://dog.ceo/api/breed/" + query + "/images");
     }
 
 };

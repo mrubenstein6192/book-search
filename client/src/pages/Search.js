@@ -27,21 +27,18 @@ class Search extends Component {
         event.preventDefault();
 
         //uses our utils/API google function through axios to call the API, then sets it to our results state
-
-        // this does save our input to our search state, which console logs fine lol
-        // but doesn't do anything with the API also lol
         API.searchGoogleBooks(this.state.search)
             .then(res => {
                 if (res.data.status === "error") {
                     throw new Error(res.data.message);
                 }
+                console.log("Our result", res.data);
                 this.setState({ results: res.data.message, error: "" });
-                console.log(this.state.search);
-                console.log(this.state.results);
+        
+                console.log("Our current search state", this.state.search);
+                console.log("Our current Google API resultes", this.state.results);
             })
             .catch(err => this.setState({ error: err.message }));
-
-
     };
 
 
