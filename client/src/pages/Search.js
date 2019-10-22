@@ -33,7 +33,7 @@ class Search extends Component {
                     throw new Error(res.data.message);
                 }
                 console.log("Our result", res.data);
-                this.setState({ results: res.data.message, error: "" });
+                this.setState({ results: res.data.items, error: "" });
         
                 console.log("Our current search state", this.state.search);
                 console.log("Our current Google API resultes", this.state.results);
