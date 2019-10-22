@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'reactstrap';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Jumbotron } from 'reactstrap';
 import API from "../utils/API";
 
@@ -14,8 +14,10 @@ class Search extends Component {
         author: "",
     };
 
+
+   
     // handle our input change for search on our form below
-    handleInputChange = event => {
+    handleChange = event => {
         this.setState({ search: event.target.value });
     }
 
@@ -30,11 +32,13 @@ class Search extends Component {
                 if (res.data.status === "error") {
                     throw new Error(res.data.message);
                 }
+                console.log("Our result", res.data);
                 this.setState({ results: res.data.message, error: "" });
+        
+                console.log("Our current search state", this.state.search);
+                console.log("Our current Google API resultes", this.state.results);
             })
             .catch(err => this.setState({ error: err.message }));
-
-
     };
 
 
@@ -67,14 +71,14 @@ class Search extends Component {
                             <FormGroup>
                                 <Label for="userSearch">Search all the books.</Label>
                                 <Input type="input" name="search" id="bookSearch"
-                                    handleInputChange={this.handleInputChange}
+                                    onChange={this.handleChange}
                                     placeholder="Search for a book. Ex. 'Harry Potter'" />
                             </FormGroup>
                             <Button onClick={this.handleFormSubmit}>Submit</Button>
                         </Form>
                     </Col>
                 </Row>
-                
+
 
 
 
