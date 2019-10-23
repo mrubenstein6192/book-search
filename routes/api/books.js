@@ -1,15 +1,15 @@
 const router = require("express").Router();
 const booksController = require("../../controllers/bookController");
 
-// This is anything that matches our "/api/books" with our controller/database
+
+// Matches with "/api/books"
 router.route("/")
-    .post(booksController.createBook);
+  .get(booksController.findAll)
+  .post(booksController.createBook);
 
-
-// this is if it matches with "/api/books/:id" which would be for a delete
+// Matches with "/api/books/:id"
 router
-    .route("/:id")
-    .get(booksController.findById)
-    .delete(booksController.deleteBook);
+  .route("/:id")
+  .delete(booksController.deleteBook);
 
 module.exports = router;

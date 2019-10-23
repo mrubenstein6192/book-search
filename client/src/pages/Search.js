@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
+import SearchResults from "../components/SearchResults";
 import { Container, Row, Col } from 'reactstrap';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Jumbotron } from 'reactstrap';
@@ -9,13 +10,13 @@ class Search extends Component {
     state = {
         search: "",
         results: [],
-        books: [],
+        savedBooks: [],
         title: "",
         author: "",
     };
 
 
-   
+
     // handle our input change for search on our form below
     handleChange = event => {
         this.setState({ search: event.target.value });
@@ -34,7 +35,7 @@ class Search extends Component {
                 }
                 console.log("Our result", res.data);
                 this.setState({ results: res.data.items, error: "" });
-        
+
                 console.log("Our current search state", this.state.search);
                 console.log("Our current Google API resultes", this.state.results);
             })
@@ -79,9 +80,15 @@ class Search extends Component {
                     </Col>
                 </Row>
 
+                {/* map through our Google Books APi call results (in state) */}
+                {this.state.results.map(results =>
+                    <SearchResults
+                        key={results.volumeInfo.title}
+                        //but how do we send to an H tag, it doesn't auto close? 
+                        h1={results.volumeInfo.title}
+                    />
 
-
-
+                )}
             </Container>
 
 
