@@ -1,11 +1,6 @@
 const db = require("../models");
 
 
-//user can save books they searched for with the Google API
-//the saved books render on the Saved page
-//user can also delete a book from the database
-
-
 module.exports = {
 
     findAll: (req, res) => {
@@ -24,24 +19,11 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
-    createBook: (req, res) => {
+    saveBook: (req, res) => {
         db.Books
             .create(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
