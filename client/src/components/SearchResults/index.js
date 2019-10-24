@@ -9,7 +9,7 @@ class SearchResults extends Component {
     }
 
 
-    onCardClick = card => {
+    onClick = card => {
         let currentBook = card;
         alert('Current book clicked' + currentBook);
     }
@@ -20,8 +20,9 @@ class SearchResults extends Component {
             <Row>
                 <Col>
                     {/* I want to map through my array results by sending props... */}
-                    <div classname="search-results">
-                        <h1>{this.props.title} || Please search for a book above!</h1>
+                    <div className="search-results">
+                        <h1>{this.props.title}</h1>
+                        {/* <p>{this.props.authors}</p> */}
 
                         {/*      handleResponse: function (response) {
          for (let i = 0; i < response.items.length; i++) {
@@ -31,7 +32,7 @@ class SearchResults extends Component {
                         {/* Ok, I can do an event click here to save my books to the database
         Or I could send the book to my Search Page component and save it there...
         But my Search Page component just needs to grab the data that was saved to our DB */}
-                        <Button onCardClick={(book) => this.onCardClick(book)}>Save this book.</Button>
+                        <Button onClick={(book) => this.onCardClick(book)}>Save this book.</Button>
                     </div>
                 </Col>
             </Row>
