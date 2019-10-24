@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
-import SearchResults from "../components/SearchResults";
+// import SearchResults from "../components/SearchResults";
 import { Container, Row, Col } from 'reactstrap';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Jumbotron } from 'reactstrap';
 import API from "../utils/API";
+import SearchResults from "../components/SearchResults";
 
 class Search extends Component {
     state = {
@@ -33,7 +34,7 @@ class Search extends Component {
                 if (res.data.status === "error") {
                     throw new Error(res.data.message);
                 }
-                console.log("Our result", res.data);
+                console.log("Our result", res.data.items);
                 this.setState({ results: res.data.items, error: "" });
 
                 console.log("Our current search state", this.state.search);
@@ -82,11 +83,18 @@ class Search extends Component {
 
                 {/* map through our Google Books APi call results (in state) */}
                 {this.state.results.map(results =>
+                        // This def works and shows book titles
+                        // <h1>{results.volumeInfo.title}</h1>
                     <SearchResults
-                        key={results.volumeInfo.title}
-                        //but how do we send to an H tag, it doesn't auto close? 
-                        h1={results.volumeInfo.title}
-                    />
+                    key={results.volumeInfo.title}
+                    
+                    title={results.volumeInfo.title}/>
+
+                    // <SearchResults
+                    //     key={results.volumeInfo.title}
+                    //     //but how do we send to an H tag, it doesn't auto close? 
+                    //     h1={results.volumeInfo.title}
+                    // />
 
                 )}
             </Container>
