@@ -16,6 +16,7 @@ class Search extends Component {
         author: "",
     };
 
+    createLessonGrid 
 
 
     // handle our input change for search on our form below
@@ -35,10 +36,12 @@ class Search extends Component {
                     throw new Error(res.data.message);
                 }
                 console.log("Our result", res.data.items);
+
                 this.setState({ results: res.data.items, error: "" });
 
                 console.log("Our current search state", this.state.search);
                 console.log("Our current Google API resultes", this.state.results);
+                console.log(`Testing result${this.state.results[0].volumeInfo.imageLinks.thumbnail}`)
             })
             .catch(err => this.setState({ error: err.message }));
     };
@@ -77,18 +80,25 @@ class Search extends Component {
                                     placeholder="Search for a book. Ex. 'Harry Potter'" />
                             </FormGroup>
                             <Button onClick={this.handleFormSubmit}>Submit</Button>
+                            <p></p>
                         </Form>
                     </Col>
                 </Row>
 
                 {/* map through our Google Books APi call results (in state) */}
                 {this.state.results.map(results =>
-                        // This def works and shows book titles
-                        // <h1>{results.volumeInfo.title}</h1>
+                    // This def works and shows book titles
+               
+                            // <h1>{results}</h1>
                     <SearchResults
-                    key={results.volumeInfo.title}
-                    
-                    title={results.volumeInfo.title}/>
+                        key={results.id}
+                        title={results.volumeInfo.title}    
+                        authors={results.volumeInfo.authors}
+                        description={results.volumeInfo.description}
+                        info={results.volumeInfo.infoLink }
+                        image={results.volumeInfo.imageLinks ? results.volumeInfo.imageLinks.thumbnail : "" }
+                       
+                    />
 
                     // <SearchResults
                     //     key={results.volumeInfo.title}
