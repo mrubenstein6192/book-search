@@ -11,12 +11,11 @@ class Search extends Component {
     state = {
         search: "",
         results: [],
-        savedBooks: [],
         title: "",
         author: "",
     };
 
-    createLessonGrid 
+
 
 
     // handle our input change for search on our form below
@@ -45,6 +44,8 @@ class Search extends Component {
             })
             .catch(err => this.setState({ error: err.message }));
     };
+
+   
 
 
 
@@ -97,6 +98,8 @@ class Search extends Component {
                         description={results.volumeInfo.description}
                         info={results.volumeInfo.infoLink }
                         image={results.volumeInfo.imageLinks ? results.volumeInfo.imageLinks.thumbnail : "" }
+                        book={results}
+                        onBookSave={(book) => this.onBookSave(book)}
                        
                     />
 
