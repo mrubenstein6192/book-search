@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 // import SearchResults from "../components/SearchResults";
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, CardGroup } from 'reactstrap';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Jumbotron } from 'reactstrap';
 import API from "../utils/API";
@@ -45,15 +45,22 @@ class Search extends Component {
             .catch(err => this.setState({ error: err.message }));
     };
 
-   
+    // setBookState (title, authors) {
+    //     console.log(title,authors);
+
+    //     this.setState({title: title, author: authors});
+
+    // };
+
+
 
 
 
     render() {
         return (
-            <Container>
+            <Container fluid>
                 <Row>
-                    <Col>
+                    <Col >
                         <Jumbotron fluid>
                             <Container fluid>
                                 <center>
@@ -72,7 +79,7 @@ class Search extends Component {
 
                 <Row>
 
-                    <Col sm="12" md={{ size: 7, offset: 2 }}>
+                    <Col >
                         <Form>
                             <FormGroup>
                                 <Label for="userSearch">Search all the books.</Label>
@@ -85,30 +92,29 @@ class Search extends Component {
                         </Form>
                     </Col>
                 </Row>
+                <Row>
+                    <Col>
+                        <CardGroup>
+                            {/* map through our Google Books APi call results (in state) */}
+                            {this.state.results.map(results =>
+                                // This def works and shows book titles
 
-                {/* map through our Google Books APi call results (in state) */}
-                {this.state.results.map(results =>
-                    // This def works and shows book titles
-               
-                            // <h1>{results}</h1>
-                    <SearchResults
-                        key={results.id}
-                        title={results.volumeInfo.title}    
-                        authors={results.volumeInfo.authors}
-                        description={results.volumeInfo.description}
-                        info={results.volumeInfo.infoLink }
-                        image={results.volumeInfo.imageLinks ? results.volumeInfo.imageLinks.thumbnail : "" }
-                        onBookSave={(image,title,authors,description,info) => this.onBookSave(image,title,authors,description,info)}
-                       
-                    />
+                                // <h1>{results}</h1>
+                                <SearchResults
+                                    key={results.id}
+                                    title={results.volumeInfo.title}
+                                    authors={results.volumeInfo.authors[0]}
+                                    description={results.volumeInfo.description}
+                                    info={results.volumeInfo.infoLink}
+                                    image={results.volumeInfo.imageLinks ? results.volumeInfo.imageLinks.thumbnail : ""}
+                                    onBookSave={(image, title, authors, description, info) => this.onBookSave(image, title, authors, description, info)}
 
-                    // <SearchResults
-                    //     key={results.volumeInfo.title}
-                    //     //but how do we send to an H tag, it doesn't auto close? 
-                    //     h1={results.volumeInfo.title}
-                    // />
+                                />
 
-                )}
+                            )}
+                        </CardGroup>
+                    </Col>
+                </Row>
             </Container>
 
 
