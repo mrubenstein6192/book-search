@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
 
+    image: {
+        type: String,
+    },
+    
     title: {
         type: String,
         required: true
@@ -17,10 +21,7 @@ const bookSchema = new Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-
-    },
+   
     link: {
         type: String,
         required: true

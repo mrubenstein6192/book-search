@@ -5,26 +5,47 @@ import {
     CardDeck, Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle,
 } from 'reactstrap';
+// import API from "../../utils/API";
 
 
 class SearchResults extends Component {
     state = {
         clicked: [],
+        image: "",
+        title: "",
+        authors: [],
+        description: "",
+        info: ""
     };
 
 
 
-    onBookClick = book => {
+    onBookClick = (image, title, authors, description, info) => {
         //This gives us the current object that was clicked.
-        console.log(book);
-        
-        // But it won't save it to state for some reason??
-        this.setState({ clicked: book, });   
+        console.log(image, title, authors, description, info);
+
+
+
+        this.setState({ 
+            image: image, 
+            title: title, 
+            authors: authors, 
+            description: description,
+            info: info
+              });
+
+        // this.saveBooks();
 
     };
 
+    saveBooks = () => {
+        
+       
 
-    
+
+
+    };
+
 
 
 
@@ -48,8 +69,10 @@ class SearchResults extends Component {
                                 </CardText>
 
 
-                        {/* We can pass through an array, or an individual prop. Can't pass through the complete object for some reason? */}
-                                <Button onClick={(e) => this.onBookClick([this.props.image, this.props.title, this.props.authors, this.props.description, this.props.info])}>Save this book.</Button>
+                                {/* We can pass through an array, or an individual prop. Can't pass through the complete object for some reason? */}
+                                <Button onClick={(e) => this.onBookClick(this.props.image, 
+                                    this.props.title, this.props.authors,
+                                    this.props.description, this.props.info)}>Save this book.</Button>
                             </CardBody>
                         </Card>
                     </CardDeck>

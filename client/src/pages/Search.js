@@ -98,8 +98,7 @@ class Search extends Component {
                         description={results.volumeInfo.description}
                         info={results.volumeInfo.infoLink }
                         image={results.volumeInfo.imageLinks ? results.volumeInfo.imageLinks.thumbnail : "" }
-                        book={results}
-                        onBookSave={(book) => this.onBookSave(book)}
+                        onBookSave={(image,title,authors,description,info) => this.onBookSave(image,title,authors,description,info)}
                        
                     />
 
