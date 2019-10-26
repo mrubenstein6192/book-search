@@ -4,14 +4,14 @@ const db = require("../models");
 module.exports = {
 
     findAll: (req, res) => {
-        db.Books
+        db.Book
             .find(req.query)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
 
     deleteBook: (req, res) => {
-        db.Books
+        db.Book
             .findById({
                 _id: req.params.id,
             })
@@ -20,7 +20,9 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     saveBook: (req, res) => {
-        db.Books
+        console.log(req.body);
+
+        db.Book
             .create(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));

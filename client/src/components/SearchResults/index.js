@@ -1,83 +1,99 @@
 import React, { Component } from "react";
-import { Row, Col } from 'reactstrap';
+// import { Row, Col } from 'reactstrap';
 import { Button } from 'reactstrap';
 import {
-    CardDeck, Card, CardImg, CardText, CardBody,
+    CardImg, CardText, CardBody,
     CardTitle, CardSubtitle,
 } from 'reactstrap';
-// import API from "../../utils/API";
+import API from "../../utils/API";
+
 
 
 class SearchResults extends Component {
+
     state = {
-        clicked: [],
         image: "",
         title: "",
         authors: [],
         description: "",
-        info: ""
+        link: ""
     };
+
+    // onBookClick = (title, authors) => {
+    //     this.props.setBookState(title, authors);
+
+    // }
 
 
 
     onBookClick = (image, title, authors, description, info) => {
-        //This gives us the current object that was clicked.
-        console.log(image, title, authors, description, info);
+        //Whyyyy do I get a console log but undefined when outside that?? I'm 
+        console.log("Grabbed from onClick: ", image, title, authors, description, info);
 
-
-
-        this.setState({ 
-            image: image, 
-            title: title, 
-            authors: authors, 
+        API.saveBook({
+            image: image,
+            title: title,
+            authors: authors,
             description: description,
-            info: info
-              });
+            link: info
+        })
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
 
+
+        //  this.setState({
+        //     image: image,
+        //     title: title,
+        //     authors: authors,
+        //     description: description,
+        //     link: info
+        // });
+
+        // console.log('This is our current state: ', this.state.title, this.state.description)
         // this.saveBooks();
 
     };
 
     saveBooks = () => {
-        
-       
 
-
+        API.saveBook({
+            image: this.state.image,
+            title: this.state.title,
+            authors: this.state.authors,
+            description: this.state.description,
+            link: this.state.link
+        })
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
 
     };
-
 
 
 
     render() {
         return (
 
-            <Row>
-                <Col sm="5">
-                    {/* I want to map through my array results by sending props... */}
+            <div className="card">
+                {/* I want to map through my array results by sending props... */}
 
-                    <CardDeck>
-                        <Card>
-                            <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
-                            <CardBody>
-                                <CardTitle>{this.props.title}</CardTitle>
-                                <CardSubtitle>By: {this.props.authors}</CardSubtitle>
-                                <CardText> {this.props.description}
-                                    -----
-                                    {this.state.clicked}
-                                    <p><a target="_blank" rel="noopener noreferrer" href={this.props.info} >More Book Detail</a></p>
-                                </CardText>
+                <Button onClick={(e) => this.onBookClick(this.props.image,
+                    this.props.title, this.props.authors,
+                    this.props.description, this.props.info)}>Save this book.</Button>
+                <p></p>
+                <CardImg top src={this.props.image} alt="Card image cap" />
+                <CardBody>
+                    <CardTitle><h5>{this.props.title}</h5></CardTitle>
+                    <CardSubtitle><i>Author: {this.props.authors}</i></CardSubtitle>
+                    <hr />
+                    <CardText><small className="text-muted"> {this.props.description}</small></CardText>
+                    <CardText>
+                        <small className="text-muted">
+                            <a target="_blank" rel="noopener noreferrer" href={this.props.info} >More Book Detail</a></small>
+                    </CardText>
 
+                </CardBody>
 
-                                {/* We can pass through an array, or an individual prop. Can't pass through the complete object for some reason? */}
-                                <Button onClick={(e) => this.onBookClick(this.props.image, 
-                                    this.props.title, this.props.authors,
-                                    this.props.description, this.props.info)}>Save this book.</Button>
-                            </CardBody>
-                        </Card>
-                    </CardDeck>
-                </Col>
-            </Row>
+            </div>
         );
     }
 }
