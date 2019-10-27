@@ -45,14 +45,6 @@ class Search extends Component {
             .catch(err => this.setState({ error: err.message }));
     };
 
-    // setBookState (title, authors) {
-    //     console.log(title,authors);
-
-    //     this.setState({title: title, author: authors});
-
-    // };
-
-
 
 
 
@@ -107,8 +99,8 @@ class Search extends Component {
                                     description={results.volumeInfo.description}
                                     info={results.volumeInfo.infoLink}
                                     image={results.volumeInfo.imageLinks ? results.volumeInfo.imageLinks.thumbnail : ""}
-                                    onBookSave={(image, title, authors, description, info) => this.onBookSave(image, title, authors, description, info)}
-
+                                    onClickSave={(image, title, authors, description, info) => this.onClickSave(image, title, authors, description, info)}
+                                    onClickDelete ={(id) => this.onClickDelete(results.id)}
                                 />
 
                             )}

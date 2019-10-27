@@ -8,7 +8,6 @@ import {
 import API from "../../utils/API";
 
 
-
 class SearchResults extends Component {
 
     state = {
@@ -19,14 +18,9 @@ class SearchResults extends Component {
         link: ""
     };
 
-    // onBookClick = (title, authors) => {
-    //     this.props.setBookState(title, authors);
+   
 
-    // }
-
-
-
-    onBookClick = (image, title, authors, description, info) => {
+    onClickSave = (image, title, authors, description, info) => {
         //Whyyyy do I get a console log but undefined when outside that?? I'm 
         console.log("Grabbed from onClick: ", image, title, authors, description, info);
 
@@ -39,18 +33,6 @@ class SearchResults extends Component {
         })
             .then(res => console.log(res))
             .catch(err => console.log(err));
-
-
-        //  this.setState({
-        //     image: image,
-        //     title: title,
-        //     authors: authors,
-        //     description: description,
-        //     link: info
-        // });
-
-        // console.log('This is our current state: ', this.state.title, this.state.description)
-        // this.saveBooks();
 
     };
 
@@ -68,6 +50,11 @@ class SearchResults extends Component {
 
     };
 
+    onClickDelete = (id) => {
+        console.log(id);
+        // this.props.deleteBook(id);
+    };
+
 
 
     render() {
@@ -75,10 +62,12 @@ class SearchResults extends Component {
 
             <div className="card">
                 {/* I want to map through my array results by sending props... */}
-
-                <Button onClick={(e) => this.onBookClick(this.props.image,
+                {/* Do a ternary for buttons ?? */}
+                <Button onClick={(e) => this.onClickSave(this.props.image,
                     this.props.title, this.props.authors,
                     this.props.description, this.props.info)}>Save this book.</Button>
+                  <p></p>
+                 <Button onClick={(e) => this.onClickDelete(this.props.id)}>Delete Book</Button>
                 <p></p>
                 <CardImg top src={this.props.image} alt="Card image cap" />
                 <CardBody>
