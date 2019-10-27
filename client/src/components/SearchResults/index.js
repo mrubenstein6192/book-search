@@ -8,7 +8,6 @@ import {
 import API from "../../utils/API";
 
 
-
 class SearchResults extends Component {
 
     state = {
@@ -19,12 +18,7 @@ class SearchResults extends Component {
         link: ""
     };
 
-    // onBookClick = (title, authors) => {
-    //     this.props.setBookState(title, authors);
-
-    // }
-
-
+   
 
     onBookClick = (image, title, authors, description, info) => {
         //Whyyyy do I get a console log but undefined when outside that?? I'm 
@@ -39,18 +33,6 @@ class SearchResults extends Component {
         })
             .then(res => console.log(res))
             .catch(err => console.log(err));
-
-
-        //  this.setState({
-        //     image: image,
-        //     title: title,
-        //     authors: authors,
-        //     description: description,
-        //     link: info
-        // });
-
-        // console.log('This is our current state: ', this.state.title, this.state.description)
-        // this.saveBooks();
 
     };
 

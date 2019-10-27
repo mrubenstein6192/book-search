@@ -45,14 +45,6 @@ class Search extends Component {
             .catch(err => this.setState({ error: err.message }));
     };
 
-    // setBookState (title, authors) {
-    //     console.log(title,authors);
-
-    //     this.setState({title: title, author: authors});
-
-    // };
-
-
 
 
 
