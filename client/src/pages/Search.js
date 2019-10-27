@@ -99,8 +99,8 @@ class Search extends Component {
                                     description={results.volumeInfo.description}
                                     info={results.volumeInfo.infoLink}
                                     image={results.volumeInfo.imageLinks ? results.volumeInfo.imageLinks.thumbnail : ""}
-                                    onBookSave={(image, title, authors, description, info) => this.onBookSave(image, title, authors, description, info)}
-
+                                    onClickSave={(image, title, authors, description, info) => this.onClickSave(image, title, authors, description, info)}
+                                    onClickDelete ={(id) => this.onClickDelete(results.id)}
                                 />
 
                             )}

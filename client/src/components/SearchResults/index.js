@@ -20,7 +20,7 @@ class SearchResults extends Component {
 
    
 
-    onBookClick = (image, title, authors, description, info) => {
+    onClickSave = (image, title, authors, description, info) => {
         //Whyyyy do I get a console log but undefined when outside that?? I'm 
         console.log("Grabbed from onClick: ", image, title, authors, description, info);
 
@@ -50,6 +50,11 @@ class SearchResults extends Component {
 
     };
 
+    onClickDelete = (id) => {
+        console.log(id);
+        // this.props.deleteBook(id);
+    };
+
 
 
     render() {
@@ -57,10 +62,12 @@ class SearchResults extends Component {
 
             <div className="card">
                 {/* I want to map through my array results by sending props... */}
-
-                <Button onClick={(e) => this.onBookClick(this.props.image,
+                {/* Do a ternary for buttons ?? */}
+                <Button onClick={(e) => this.onClickSave(this.props.image,
                     this.props.title, this.props.authors,
                     this.props.description, this.props.info)}>Save this book.</Button>
+                  <p></p>
+                 <Button onClick={(e) => this.onClickDelete(this.props.id)}>Delete Book</Button>
                 <p></p>
                 <CardImg top src={this.props.image} alt="Card image cap" />
                 <CardBody>

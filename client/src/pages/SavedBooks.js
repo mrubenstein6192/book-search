@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-// import SearchResults from "../components/SearchResults";
+import SearchResults from "../components/SearchResults";
 import API from "../utils/API";
 import {
     Col, Row, Container,
-    Jumbotron,
+    Jumbotron, CardGroup
 } from 'reactstrap';
 // import { Link } from "react-router-dom";
 
@@ -22,7 +22,7 @@ class SavedBooks extends Component {
         this.loadBooks();
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         console.log("Current updated state", this.state.books);
     }
 
@@ -35,6 +35,12 @@ class SavedBooks extends Component {
             .catch(err => console.log(err));
 
         console.log(this.state.books);
+    };
+
+    deleteBook = id => {
+        API.deleteBooks(id)
+        .then(res => this.loadBooks())
+        .catch(err => console.log(err));
     };
 
 
@@ -63,21 +69,23 @@ class SavedBooks extends Component {
                 <Row>
                     <Col >
                         <h1>Saved Books</h1>
-                       
 
-                        {/* 
-                        {this.state.books.map(books =>
-                            <SearchResults
-                                key={books.data.id}
-                                title={books.data.title}
-                                authors={books.data.authors[0]}
-                                description={books.data.description}
-                                info={books.data.link}
-                                image={books.data.image ? books.data.image : ""}
 
-                            />
-                        
-                    )} */}
+                        <CardGroup>
+                            {this.state.books.map(books =>
+                               
+                                <SearchResults
+                                    key={books._id}
+                                    title={books.title}
+                                    authors={books.authors[0]}
+                                    description={books.description}
+                                    info={books.link}
+                                    image={books.image ? books.image : ""}
+
+                                />
+                                
+                            )}
+                        </CardGroup>
                     </Col>
                 </Row>
             </Container >
