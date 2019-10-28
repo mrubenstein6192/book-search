@@ -51,8 +51,11 @@ class SearchResults extends Component {
     };
 
     onClickDelete = (id) => {
-        console.log(id);
-        // this.props.deleteBook(id);
+        console.log("Delete book id", id);
+        API.deleteBook(id)
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
+
     };
 
 
@@ -69,7 +72,7 @@ class SearchResults extends Component {
                   <p></p>
                  <Button onClick={(e) => this.onClickDelete(this.props.id)}>Delete Book</Button>
                 <p></p>
-                <CardImg top src={this.props.image} alt="Card image cap" />
+                <CardImg top src={this.props.image} id={this.props.id} alt="Card image cap" />
                 <CardBody>
                     <CardTitle><h5>{this.props.title}</h5></CardTitle>
                     <CardSubtitle><i>Author: {this.props.authors}</i></CardSubtitle>
