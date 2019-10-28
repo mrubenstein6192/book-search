@@ -11,11 +11,6 @@ import {
 class SavedBooks extends Component {
     state = {
         books: [],
-        image: "",
-        title: "",
-        author: [],
-        description: "",
-        link: ""
     };
 
     componentDidMount() {
@@ -23,24 +18,25 @@ class SavedBooks extends Component {
     }
 
     componentDidUpdate() {
-        console.log("Current updated state", this.state.books);
+        // console.log("Current updated state", this.state.books);
+        this.loadBooks();
     }
 
 
     loadBooks = () => {
         API.getBooks()
             .then(res =>
-                this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+                this.setState({ books: res.data })
             )
             .catch(err => console.log(err));
-
-        console.log(this.state.books);
     };
 
     deleteBook = id => {
         API.deleteBooks(id)
-        .then(res => this.loadBooks())
-        .catch(err => console.log(err));
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
+
+
     };
 
 
@@ -73,17 +69,19 @@ class SavedBooks extends Component {
 
                         <CardGroup>
                             {this.state.books.map(books =>
-                               
+
                                 <SearchResults
                                     key={books._id}
                                     title={books.title}
                                     authors={books.authors[0]}
                                     description={books.description}
                                     info={books.link}
+                                    id={books._id}
                                     image={books.image ? books.image : ""}
-
+                                    onClickSave={(image, title, authors, description, info) => this.onClickSave(image, title, authors, description, info)}
+                                    onClickDelete={(book) => this.onClickDelete(book)}
                                 />
-                                
+
                             )}
                         </CardGroup>
                     </Col>
