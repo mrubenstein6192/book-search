@@ -11,16 +11,18 @@ import {
 class SavedBooks extends Component {
     state = {
         books: [],
+        deleteBook: [],
+        arrayCounter: 0
     };
 
     componentDidMount() {
         this.loadBooks();
     }
 
-    componentDidUpdate() {
-        // console.log("Current updated state", this.state.books);
-        this.loadBooks();
-    }
+    // componentDidUpdate() {
+    //     // console.log("Current updated state", this.state.books);
+    //     this.loadBooks();
+    // }
 
 
     loadBooks = () => {
@@ -31,13 +33,15 @@ class SavedBooks extends Component {
             .catch(err => console.log(err));
     };
 
-    deleteBook = id => {
-        API.deleteBooks(id)
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err));
 
+    deleteBook = (index) => {
+        console.log(index);
 
-    };
+        let newBooks = this.state.books.splice(index, 1);
+
+        console.log(newBooks);
+
+    }
 
 
 
@@ -68,18 +72,21 @@ class SavedBooks extends Component {
 
 
                         <CardGroup>
-                            {this.state.books.map(books =>
+                            {this.state.books.map((books, index) =>
 
-                                <SearchResults
+                                // this.setState({ arrayCounter: this.state.arrayCounter += })
+
+                                < SearchResults
                                     key={books._id}
                                     title={books.title}
                                     authors={books.authors[0]}
                                     description={books.description}
                                     info={books.link}
                                     id={books._id}
+                                    index={index}
                                     image={books.image ? books.image : ""}
                                     onClickSave={(image, title, authors, description, info) => this.onClickSave(image, title, authors, description, info)}
-                                    onClickDelete={(book) => this.onClickDelete(book)}
+                                    onClickDelete={(booksId, index) => this.onClickDelete(booksId, index)}
                                 />
 
                             )}
