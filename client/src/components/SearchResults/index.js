@@ -11,11 +11,7 @@ import API from "../../utils/API";
 class SearchResults extends Component {
 
     state = {
-        image: "",
-        title: "",
-        authors: [],
-        description: "",
-        link: ""
+       deleteBook: 0
     };
 
    
@@ -31,32 +27,23 @@ class SearchResults extends Component {
             description: description,
             link: info
         })
-            .then(res => console.log(res))
+            .then(res => this.props.loadBooks())
             .catch(err => console.log(err));
 
     };
 
-    saveBooks = () => {
+   // Ok, I can get the id fine from our book, how do I send this to my main component?
 
-        API.saveBook({
-            image: this.state.image,
-            title: this.state.title,
-            authors: this.state.authors,
-            description: this.state.description,
-            link: this.state.link
-        })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+    onClickDelete = (id, index) => {
+        console.log('Delete book id:', id,  'and index:', index);
 
-    };
-
-    onClickDelete = (id) => {
-        console.log("Delete book id", id);
         API.deleteBook(id)
-      .then(res => this.loadBooks())
+      .then(res => this.props.loadBooks())
       .catch(err => console.log(err));
 
     };
+
+
 
 
 
@@ -70,7 +57,7 @@ class SearchResults extends Component {
                     this.props.title, this.props.authors,
                     this.props.description, this.props.info)}>Save this book.</Button>
                   <p></p>
-                 <Button onClick={(e) => this.onClickDelete(this.props.id)}>Delete Book</Button>
+                 <Button onClick={(e) => this.onClickDelete(this.props.id, this.props.index)}>Delete Book</Button>
                 <p></p>
                 <CardImg top src={this.props.image} id={this.props.id} alt="Card image cap" />
                 <CardBody>
