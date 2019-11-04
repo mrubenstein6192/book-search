@@ -39,11 +39,11 @@ class SavedBooks extends Component {
 
         let newBooks = this.state.books.splice(index, 1);
 
-        console.log(newBooks);
+        // console.log(newBooks);
 
     }
 
-
+ 
 
 
     render() {
