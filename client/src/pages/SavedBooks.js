@@ -19,10 +19,10 @@ class SavedBooks extends Component {
         this.loadBooks();
     }
 
-    // componentDidUpdate() {
-    //     // console.log("Current updated state", this.state.books);
-    //     this.loadBooks();
-    // }
+    componentDidUpdate() {
+        // console.log("Current updated state", this.state.books);
+        this.loadBooks();
+    }
 
 
     loadBooks = () => {
